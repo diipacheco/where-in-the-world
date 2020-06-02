@@ -22,7 +22,7 @@ describe('sagas integration tests', () => {
 
     await runSaga({
       dispatch: (action: AnyAction) => dispatched.push(action),
-    }, sagas.default);
+    }, sagas.handleLoadRequestAction);
 
     expect(requestTools).toHaveBeenCalledTimes(1);
     expect(dispatched).toStrictEqual([actions.handleLoadSuccess(response.data)]);
@@ -39,7 +39,7 @@ describe('sagas integration tests', () => {
 
     await runSaga({
       dispatch: (action: AnyAction) => dispatched.push(action),
-    }, sagas.default);
+    }, sagas.handleLoadRequestAction);
 
     expect(requestTools).toHaveBeenCalledTimes(1);
     expect(dispatched).toStrictEqual([actions.handleLoadFailure()]);

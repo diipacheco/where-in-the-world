@@ -1,9 +1,12 @@
-import { call, put } from 'redux-saga/effects';
+import {
+  call, put, all, takeLatest,
+} from 'redux-saga/effects';
 
 import api from '../../../services/api';
 import * as actions from './actions';
+import { CountriesTypes } from './types';
 
-export default function* gen() {
+export function* handleLoadRequestAction() {
   try {
     const response = yield call(api.get, '/all');
     yield put(actions.handleLoadSuccess(response.data));
@@ -12,3 +15,7 @@ export default function* gen() {
   }
   return yield null;
 }
+
+export default all([
+  takeLatest(CountriesTypes.LOAD_REQUEST, handleLoadRequestAction),
+]);
