@@ -5,7 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ApplicationState } from '../../store/index';
 import { handleLoadRequest } from '../../store/modules/countries/actions';
 
-// import { Container } from './styles';
+import {
+  Container, List, ListItem,
+} from './styles';
 
 const Main: React.FC = () => {
   const { data: countries, loading } = useSelector((state: ApplicationState) => state.countries);
@@ -16,13 +18,13 @@ const Main: React.FC = () => {
   }, [dispatch]);
 
   return (
-    <>
+    <Container>
       {loading ? (
         <h1 data-test="loading-element">loading...</h1>
       ) : (
-        <ul>
+        <List>
           {countries?.map((country) => (
-            <li key={country.name} data-test="countries-list">
+            <ListItem key={country.name} data-test="countries-list">
               <img src={country.flag} alt={`Flag from ${country.name}`} />
 
               <section className="country-infos">
@@ -31,29 +33,29 @@ const Main: React.FC = () => {
                 <div className="country-details">
                   <p>
                     <strong>
-                      Population
+                      Population:
                     </strong>
                     {country.population}
                   </p>
                   <p>
                     <strong>
-                      Region
+                      Region:
                     </strong>
                     {country.region}
                   </p>
                   <p>
                     <strong>
-                      Capital
+                      Capital:
                     </strong>
                     {country.capital}
                   </p>
                 </div>
               </section>
-            </li>
+            </ListItem>
           ))}
-        </ul>
+        </List>
       )}
-    </>
+    </Container>
   );
 };
 
