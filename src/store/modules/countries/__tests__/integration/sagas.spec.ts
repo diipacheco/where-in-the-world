@@ -15,7 +15,7 @@ describe('sagas integration tests', () => {
       data: payload,
     };
 
-    const requestTools = jest.spyOn(api, 'get')
+    const requestCountries = jest.spyOn(api, 'get')
       .mockResolvedValue(response);
 
     const dispatched: Array<AnyAction> = [];
@@ -24,7 +24,7 @@ describe('sagas integration tests', () => {
       dispatch: (action: AnyAction) => dispatched.push(action),
     }, sagas.handleLoadRequestAction);
 
-    expect(requestTools).toHaveBeenCalledTimes(1);
+    expect(requestCountries).toHaveBeenCalledTimes(1);
     expect(dispatched).toStrictEqual([actions.handleLoadSuccess(response.data)]);
 
     requestTools.mockClear();
@@ -33,7 +33,7 @@ describe('sagas integration tests', () => {
   it('should call api and dispatch LOAD_FAILURE action', async () => {
     expect.hasAssertions();
 
-    const requestTools = jest.spyOn(api, 'get').mockRejectedValue(new Error());
+    const requestCountries = jest.spyOn(api, 'get').mockRejectedValue(new Error());
 
     const dispatched: Array<AnyAction> = [];
 
@@ -41,7 +41,7 @@ describe('sagas integration tests', () => {
       dispatch: (action: AnyAction) => dispatched.push(action),
     }, sagas.handleLoadRequestAction);
 
-    expect(requestTools).toHaveBeenCalledTimes(1);
+    expect(requestCountries).toHaveBeenCalledTimes(1);
     expect(dispatched).toStrictEqual([actions.handleLoadFailure()]);
 
     requestTools.mockClear();
