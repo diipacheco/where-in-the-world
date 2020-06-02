@@ -9,6 +9,7 @@ const payload: Country[] = [
     capital: 'Brasília',
     nativeName: 'Brasil',
     subregion: 'South America',
+    flag: 'Brazil',
     topLevelDomain: [
       '.br',
     ],

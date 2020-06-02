@@ -23,7 +23,7 @@ const Main: React.FC = () => {
         <ul>
           {countries?.map((country) => (
             <li key={country.name} data-test="countries-list">
-              <img src="" alt="" />
+              <img src={country.flag} alt={`Flag from ${country.name}`} />
 
               <section className="country-infos">
                 <h1>{country.name}</h1>
@@ -48,9 +48,7 @@ const Main: React.FC = () => {
                     {country.capital}
                   </p>
                 </div>
-
               </section>
-
             </li>
           ))}
         </ul>
