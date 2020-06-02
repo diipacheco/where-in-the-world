@@ -1667,6 +1667,14 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
+"@types/redux-testkit@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@types/redux-testkit/-/redux-testkit-1.0.5.tgz#a2cd30e151d5bcd5eb9b6062a64c3f378d70a046"
+  integrity sha512-ccuCAGA1pKjyKzH6kt/yECzlAHjGyl6XV3xNBgUhmXfwYX3q/zE6syqpJivfYOovsA1C1AMIUZ2V54vPldL7fg==
+  dependencies:
+    redux "*"
+    redux-thunk "*"
+
 "@types/stack-utils@^1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@types/stack-utils/-/stack-utils-1.0.1.tgz#0a851d3bd96498fa25c33ab7278ed3bd65f06c3e"
@@ -9282,7 +9290,12 @@ redux-testkit@^1.0.6:
     babel-polyfill "^6.8.0"
     lodash "^4.0.0"
 
-redux@^4.0.0, redux@^4.0.4, redux@^4.0.5:
+redux-thunk@*:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-2.3.0.tgz#51c2c19a185ed5187aaa9a2d08b666d0d6467622"
+  integrity sha512-km6dclyFnmcvxhAcrQV2AkZmPQjzPDjgVlQtR0EQjxZPyJ0BnMf3in1ryuR8A2qU0HldVRfxYXbFSKlI3N7Slw==
+
+redux@*, redux@^4.0.0, redux@^4.0.4, redux@^4.0.5:
   version "4.0.5"
   resolved "https://registry.yarnpkg.com/redux/-/redux-4.0.5.tgz#4db5de5816e17891de8a80c424232d06f051d93f"
   integrity sha512-VSz1uMAH24DM6MF72vcojpYPtrTUu3ByVWfPL1nPfVRb5mZVTve5GnNCUV53QM/BZ66xfWrm0CTWoM+Xlz8V1w==

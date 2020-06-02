@@ -1,24 +1,11 @@
 /* eslint-disable no-unused-vars */
 import * as actions from '../../actions';
-import { CountriesTypes, Country } from '../../types';
+import { CountriesTypes } from '../../types';
 
-interface ExpectedActionParams {
-  type: string
-  payload?: any
-}
+import handleExpectedAction from '../../../../../utils/tests/handleExpectedAction';
+import payload from '../../../../../utils/tests/payloadMock';
 
-describe('unit action creators tests', () => {
-  function handleExpectedAction({ type, payload }: ExpectedActionParams) {
-    const actionFormat = {
-      error: undefined,
-      meta: undefined,
-      type,
-      payload: payload || undefined,
-    };
-
-    return actionFormat;
-  }
-
+describe('action creators unit tests', () => {
   it('should create a action to handle countries request', () => {
     expect.hasAssertions();
 
@@ -29,47 +16,6 @@ describe('unit action creators tests', () => {
 
   it('should create a action to handle countries success request', () => {
     expect.hasAssertions();
-
-    const payload: Country[] = [
-      {
-        name: 'Brazil',
-        population: 206135893,
-        region: 'Americas',
-        capital: 'Brasília',
-        nativeName: 'Brasil',
-        subregion: 'South America',
-        topLevelDomain: [
-          '.br',
-        ],
-        currencies: [
-          {
-            code: 'BRL',
-            name: 'Brazilian real',
-            symbol: 'R$',
-          },
-        ],
-        languages: [
-          {
-            iso639_1: 'pt',
-            iso639_2: 'por',
-            name: 'Portuguese',
-            nativeName: 'Português',
-          },
-        ],
-        borders: [
-          'ARG',
-          'BOL',
-          'COL',
-          'GUF',
-          'GUY',
-          'PRY',
-          'PER',
-          'SUR',
-          'URY',
-          'VEN',
-        ],
-      },
-    ];
 
     const action = handleExpectedAction(
       {
