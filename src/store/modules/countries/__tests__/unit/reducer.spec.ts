@@ -1,13 +1,11 @@
 /* eslint-disable no-unused-vars */
 import { Reducer } from 'redux-testkit';
-import { AnyAction } from 'redux';
 
 import handleExpectedAction from '../../../../../utils/tests/handleExpectedAction';
 import payload from '../../../../../utils/tests/payloadMock';
 
 import countries from '../../reducer';
 import { CountriesState, CountriesTypes } from '../../types';
-
 
 describe('reducer unit tests', () => {
   it('should have a initial state', () => {

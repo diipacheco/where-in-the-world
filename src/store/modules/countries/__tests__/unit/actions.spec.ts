@@ -27,7 +27,7 @@ describe('action creators unit tests', () => {
     expect(actions.handleLoadSuccess(payload)).toStrictEqual(action);
   });
 
-  it('should create a action to handle countries success failure', () => {
+  it('should create a action to handle countries failure request', () => {
     expect.hasAssertions();
 
     const action = handleExpectedAction({ type: CountriesTypes.LOAD_FAILURE });
