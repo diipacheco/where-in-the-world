@@ -27,6 +27,21 @@ const reducer: Reducer<CountriesState> = (state = INITIAL_STATE, action) => prod
       draft.error = true;
       break;
     }
+    case CountriesTypes.LOAD_SEARCH_REQUEST: {
+      draft.loading = true;
+      break;
+    }
+    case CountriesTypes.LOAD_SEARCH_SUCCESS: {
+      draft.loading = false;
+      draft.data = action.payload.country;
+      break;
+    }
+    case CountriesTypes.LOAD_SEARCH_FAILURE: {
+      draft.loading = false;
+      draft.error = true;
+      draft.errorMessage = action.payload.message;
+      break;
+    }
     default:
   }
 });

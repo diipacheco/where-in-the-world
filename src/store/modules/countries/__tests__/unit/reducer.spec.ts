@@ -1,3 +1,5 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable consistent-return */
 /* eslint-disable no-unused-vars */
 import { Reducer } from 'redux-testkit';
 
@@ -66,6 +68,95 @@ describe('reducer unit tests', () => {
     const expectedState = { data: [], loading: true, error: false };
 
     const result = { data: [], loading: false, error: true };
+
+    Reducer(countries)
+      .withState(expectedState)
+      .expect(action)
+      .toReturnState(result);
+  });
+
+  it('should handle LOAD_SEARCH_REQUEST action on initial state', () => {
+    expect.hasAssertions();
+
+    const action = handleExpectedAction(
+      {
+        type: CountriesTypes.LOAD_SEARCH_REQUEST,
+        payload: { country: 'Brazil' },
+      },
+    );
+
+    const expectedState = {
+      data: payload,
+      loading:
+      false,
+      error: false,
+    };
+
+    const result = {
+      data: payload,
+      loading: true,
+      error:
+      false,
+    };
+
+    Reducer(countries)
+      .withState(expectedState)
+      .expect(action)
+      .toReturnState(result);
+  });
+
+  it('should handle LOAD_SEARCH_SUCCESS action on initial state', () => {
+    expect.hasAssertions();
+
+    const filtredCountry = payload.filter((country) => country.name === 'Brazil' || country.nativeName === 'Brasil');
+
+    const action = handleExpectedAction(
+      {
+        type: CountriesTypes.LOAD_SEARCH_SUCCESS,
+        payload: { country: filtredCountry },
+      },
+    );
+
+    const expectedState = {
+      data: payload,
+      loading: true,
+      error: false,
+    };
+
+    const result = {
+      data: filtredCountry,
+      loading: false,
+      error: false,
+    };
+
+    Reducer(countries)
+      .withState(expectedState)
+      .expect(action)
+      .toReturnState(result);
+  });
+
+  it('should handle LOAD_SEARCH_FAILURE action on inital state', () => {
+    expect.hasAssertions();
+
+    const action = handleExpectedAction(
+      {
+        type: CountriesTypes.LOAD_SEARCH_FAILURE,
+        payload: { message: 'Not Found' },
+      },
+    );
+
+    const expectedState = {
+      data: payload,
+      loading: true,
+      error: false,
+    };
+
+    const result = {
+      data: payload,
+      loading: false,
+      error: true,
+      errorMessage: 'Not Found',
+    };
 
     Reducer(countries)
       .withState(expectedState)

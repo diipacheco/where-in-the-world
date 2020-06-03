@@ -55,4 +55,5 @@ export interface CountriesState {
   data: Country[],
   loading: boolean,
   error: boolean
+  errorMessage?: string
 }

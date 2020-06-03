@@ -30,7 +30,7 @@ describe('<Main/> component', () => {
 
     const countriesList = wrapper.find('li[data-test="countries-list"]');
 
-    expect(countriesList).toHaveLength(1);
+    expect(countriesList).toHaveLength(2);
     expect(countriesList).toMatchInlineSnapshot('ReactWrapper {}');
   });
   it('should appear a loading information if the page dont finished the countries fetch', () => {
