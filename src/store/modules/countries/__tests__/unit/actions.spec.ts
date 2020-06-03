@@ -6,32 +6,73 @@ import handleExpectedAction from '../../../../../utils/tests/handleExpectedActio
 import payload from '../../../../../utils/tests/payloadMock';
 
 describe('action creators unit tests', () => {
-  it('should create a action to handle countries request', () => {
-    expect.hasAssertions();
+  describe('listing countries action creators', () => {
+    it('should create a action to handle countries request', () => {
+      expect.hasAssertions();
 
-    const action = handleExpectedAction({ type: CountriesTypes.LOAD_REQUEST });
+      const action = handleExpectedAction({ type: CountriesTypes.LOAD_REQUEST });
 
-    expect(actions.handleLoadRequest()).toStrictEqual(action);
+      expect(actions.handleLoadRequest()).toStrictEqual(action);
+    });
+
+    it('should create a action to handle countries success request', () => {
+      expect.hasAssertions();
+
+      const action = handleExpectedAction(
+        {
+          type: CountriesTypes.LOAD_SUCCESS,
+          payload: { countries: payload },
+        },
+      );
+
+      expect(actions.handleLoadSuccess(payload)).toStrictEqual(action);
+    });
+
+    it('should create a action to handle countries failure request', () => {
+      expect.hasAssertions();
+
+      const action = handleExpectedAction({ type: CountriesTypes.LOAD_FAILURE });
+
+      expect(actions.handleLoadFailure()).toStrictEqual(action);
+    });
   });
 
-  it('should create a action to handle countries success request', () => {
-    expect.hasAssertions();
+  describe('searching countries by name action creators', () => {
+    it('should create a action to handle countries request based on the country name', () => {
+      expect.hasAssertions();
 
-    const action = handleExpectedAction(
-      {
-        type: CountriesTypes.LOAD_SUCCESS,
-        payload: { countries: payload },
-      },
-    );
+      const action = handleExpectedAction(
+        {
+          type: CountriesTypes.LOAD_SEARCH_REQUEST,
+          payload: { countryName: 'Brazil' },
+        },
+      );
 
-    expect(actions.handleLoadSuccess(payload)).toStrictEqual(action);
-  });
+      expect(actions.handleLoadSearchRequest('Brazil')).toStrictEqual(action);
+    });
+    it('should create a action to handle countries success request based on the country name', () => {
+      expect.hasAssertions();
 
-  it('should create a action to handle countries failure request', () => {
-    expect.hasAssertions();
+      const action = handleExpectedAction(
+        {
+          type: CountriesTypes.LOAD_SEARCH_SUCCESS,
+          payload: { country: payload },
+        },
+      );
 
-    const action = handleExpectedAction({ type: CountriesTypes.LOAD_FAILURE });
+      expect(actions.handleLoadSearchSuccess(payload)).toStrictEqual(action);
+    });
+    it('should create a action to handle countries failure request based on the country name', () => {
+      expect.hasAssertions();
 
-    expect(actions.handleLoadFailure()).toStrictEqual(action);
+      const action = handleExpectedAction(
+        {
+          type: CountriesTypes.LOAD_SEARCH_FAILURE,
+          payload: { message: 'Country not found' },
+        },
+      );
+
+      expect(actions.handleLoadSearchFailure('Country not found')).toStrictEqual(action);
+    });
   });
 });

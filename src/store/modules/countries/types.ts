@@ -1,8 +1,20 @@
 /* eslint-disable no-unused-vars */
 export enum CountriesTypes {
+  /**
+   * REQUEST ALL COUNTRIES
+   */
+
   LOAD_REQUEST = '@witw/LOAD_REQUEST',
   LOAD_SUCCESS = '@witw/LOAD_SUCCESS',
-  LOAD_FAILURE = '@witw/LOAD_FAILURE'
+  LOAD_FAILURE = '@witw/LOAD_FAILURE',
+
+  /**
+   * REQUEST FILTRED COUNTRIES BY COUNTRY NAME
+   */
+
+   LOAD_SEARCH_REQUEST = '@witw/LOAD_SEARCH_REQUEST',
+   LOAD_SEARCH_SUCCESS = '@witw/LOAD_SEARCH_SUCCESS',
+   LOAD_SEARCH_FAILURE = '@witw/LOAD_SEARCH_FAILURE',
 }
 
 interface Currencie {
@@ -10,6 +22,7 @@ interface Currencie {
   name: string
   symbol: string
 }
+
 interface Language {
   iso639_1: string,
   iso639_2: string,
