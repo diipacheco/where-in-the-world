@@ -16,6 +16,20 @@ export function* handleLoadRequestAction() {
   return yield null;
 }
 
+interface Payload {
+  country: string
+}
+
+export function* handleLoadSearchRequestAction({ country }: Payload) {
+  try {
+    const response = yield call(api.get, `/name/${country}?fullText=true`);
+    yield put(actions.handleLoadSearchSuccess(response.data));
+  } catch (error) {
+    yield put(actions.handleLoadSearchFailure(error.message));
+  }
+}
+
 export default all([
   takeLatest(CountriesTypes.LOAD_REQUEST, handleLoadRequestAction),
+  takeLatest(CountriesTypes.LOAD_SEARCH_REQUEST, handleLoadRequestAction),
 ]);

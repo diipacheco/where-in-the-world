@@ -15,7 +15,7 @@ describe('sagas integration tests', () => {
       data: payload,
     };
 
-    const requestTools = jest.spyOn(api, 'get')
+    const requestCountries = jest.spyOn(api, 'get')
       .mockResolvedValue(response);
 
     const dispatched: Array<AnyAction> = [];
@@ -24,16 +24,16 @@ describe('sagas integration tests', () => {
       dispatch: (action: AnyAction) => dispatched.push(action),
     }, sagas.handleLoadRequestAction);
 
-    expect(requestTools).toHaveBeenCalledTimes(1);
+    expect(requestCountries).toHaveBeenCalledTimes(1);
     expect(dispatched).toStrictEqual([actions.handleLoadSuccess(response.data)]);
 
-    requestTools.mockClear();
+    requestCountries.mockClear();
   });
 
   it('should call api and dispatch LOAD_FAILURE action', async () => {
     expect.hasAssertions();
 
-    const requestTools = jest.spyOn(api, 'get').mockRejectedValue(new Error());
+    const requestCountries = jest.spyOn(api, 'get').mockRejectedValue(new Error());
 
     const dispatched: Array<AnyAction> = [];
 
@@ -41,9 +41,58 @@ describe('sagas integration tests', () => {
       dispatch: (action: AnyAction) => dispatched.push(action),
     }, sagas.handleLoadRequestAction);
 
-    expect(requestTools).toHaveBeenCalledTimes(1);
+    expect(requestCountries).toHaveBeenCalledTimes(1);
     expect(dispatched).toStrictEqual([actions.handleLoadFailure()]);
 
-    requestTools.mockClear();
+    requestCountries.mockClear();
+  });
+
+  it('should call api and dispatch LOAD_SEARCH_SUCCESS action', async () => {
+    expect.hasAssertions();
+
+    const filtredCountry = payload.filter((country) => country.name === 'Brazil' || country.nativeName === 'Brasil');
+
+    const response = {
+      data: filtredCountry,
+    };
+
+    const requestCountry = jest.spyOn(api, 'get')
+      .mockResolvedValue(response);
+
+    const dispatched: Array<AnyAction> = [];
+
+    await runSaga({
+      dispatch: (action: AnyAction) => dispatched.push(action),
+    }, sagas.handleLoadSearchRequestAction, { country: 'Brazil' });
+
+    expect(requestCountry).toHaveBeenCalledTimes(1);
+    expect(dispatched).toStrictEqual([actions.handleLoadSearchSuccess(response.data)]);
+
+    requestCountry.mockClear();
+  });
+
+  it('should call api and dispatch LOAD_SEARCH_FAILURE action', async () => {
+    expect.hasAssertions();
+
+    const response = {
+      data: {
+        status: '404',
+        message: 'Not Found',
+      },
+    };
+
+    const requestCountry = jest.spyOn(api, 'get')
+      .mockRejectedValue(response.data);
+
+    const dispatched: Array<AnyAction> = [];
+
+    await runSaga({
+      dispatch: (action: AnyAction) => dispatched.push(action),
+    }, sagas.handleLoadSearchRequestAction, { country: 'asdasdasd' });
+
+    expect(requestCountry).toHaveBeenCalledTimes(1);
+    expect(dispatched).toStrictEqual([actions.handleLoadSearchFailure(response.data.message)]);
+
+    requestCountry.mockClear();
   });
 });
