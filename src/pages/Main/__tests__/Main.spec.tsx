@@ -9,7 +9,7 @@ import payload from '../../../utils/tests/payloadMock';
 const mockStore = configureMockStore([]);
 
 describe('<Main/> component', () => {
-  it('should render a list with the countries requested in the api', () => {
+  it('should render a list of countries', () => {
     expect.hasAssertions();
 
     const applicationState = {
@@ -33,7 +33,7 @@ describe('<Main/> component', () => {
     expect(countriesList).toHaveLength(2);
     expect(countriesList).toMatchInlineSnapshot('ReactWrapper {}');
   });
-  it('should appear a loading information if the page dont finished the countries fetch', () => {
+  it('should appear a loading information if the page dont finished the countries render', () => {
     expect.hasAssertions();
 
     const applicationState = {

@@ -6,6 +6,7 @@ import api from '../../../../../services/api';
 import payload from '../../../../../utils/tests/payloadMock';
 import * as actions from '../../actions';
 import * as sagas from '../../sagas';
+import { CountriesTypes } from '../../types';
 
 describe('sagas integration tests', () => {
   it('should call api and dispatch LOAD_SUCCESS action', async () => {
@@ -63,7 +64,12 @@ describe('sagas integration tests', () => {
 
     await runSaga({
       dispatch: (action: AnyAction) => dispatched.push(action),
-    }, sagas.handleLoadSearchRequestAction, { country: 'Brazil' });
+    }, sagas.handleLoadSearchRequestAction, {
+      type: CountriesTypes.LOAD_SEARCH_REQUEST,
+      payload: {
+        countryName: 'Brazil',
+      },
+    });
 
     expect(requestCountry).toHaveBeenCalledTimes(1);
     expect(dispatched).toStrictEqual([actions.handleLoadSearchSuccess(response.data)]);
@@ -88,7 +94,12 @@ describe('sagas integration tests', () => {
 
     await runSaga({
       dispatch: (action: AnyAction) => dispatched.push(action),
-    }, sagas.handleLoadSearchRequestAction, { country: 'asdasdasd' });
+    }, sagas.handleLoadSearchRequestAction, {
+      type: CountriesTypes.LOAD_SEARCH_REQUEST,
+      payload: {
+        countryName: 'asdasd',
+      },
+    });
 
     expect(requestCountry).toHaveBeenCalledTimes(1);
     expect(dispatched).toStrictEqual([actions.handleLoadSearchFailure(response.data.message)]);

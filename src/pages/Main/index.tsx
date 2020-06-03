@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ApplicationState } from '../../store/index';
 import { handleLoadRequest } from '../../store/modules/countries/actions';
 
+import Input from '../../components/Input';
+
 import {
   Container, List, ListItem,
 } from './styles';
@@ -19,6 +21,7 @@ const Main: React.FC = () => {
 
   return (
     <Container>
+      <Input defaultText="" />
       {loading ? (
         <h1 data-test="loading-element">loading...</h1>
       ) : (
