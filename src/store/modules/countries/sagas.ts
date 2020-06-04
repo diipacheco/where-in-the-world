@@ -24,7 +24,7 @@ export function* handleLoadSearchRequestAction({ payload }: ReturnType<typeof ha
     const response = yield call(api.get, `/name/${payload.countryName}?fullText=true`);
     yield put(handleLoadSearchSuccess(response.data));
   } catch (error) {
-    yield put(handleLoadSearchFailure(error.message));
+    yield put(handleLoadSearchFailure('flag not found, please typed another one'));
   }
 }
 

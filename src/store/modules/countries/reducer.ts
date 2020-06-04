@@ -19,6 +19,7 @@ const reducer: Reducer<CountriesState> = (state = INITIAL_STATE, action) => prod
     }
     case CountriesTypes.LOAD_SUCCESS: {
       draft.loading = false;
+      draft.error = false;
       draft.data = action.payload.countries;
       break;
     }
@@ -33,6 +34,7 @@ const reducer: Reducer<CountriesState> = (state = INITIAL_STATE, action) => prod
     }
     case CountriesTypes.LOAD_SEARCH_SUCCESS: {
       draft.loading = false;
+      draft.error = false;
       draft.data = action.payload.country;
       break;
     }

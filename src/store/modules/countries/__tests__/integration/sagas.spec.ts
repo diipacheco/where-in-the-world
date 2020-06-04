@@ -83,7 +83,7 @@ describe('sagas integration tests', () => {
     const response = {
       data: {
         status: '404',
-        message: 'Not Found',
+        message: 'flag not found, please typed another one',
       },
     };
 

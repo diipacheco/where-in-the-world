@@ -2,9 +2,11 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useDebouncedCallback } from 'use-debounce';
 import { string } from 'prop-types';
+import { FaSearch } from 'react-icons/fa';
 
-import { handleLoadSearchRequest } from '../../store/modules/countries/actions';
-// import { Container } from './styles';
+import { handleLoadSearchRequest, handleLoadRequest } from '../../store/modules/countries/actions';
+
+import Container from './styles';
 
 interface Props {
   defaultText: string
@@ -23,19 +25,28 @@ const Input: React.FC<Props> = ({ defaultText }) => {
   );
 
   useEffect(() => {
-    if (inputText.length > 1) {
-      dispatch(handleLoadSearchRequest(inputText));
+    function handleDispatches() {
+      if (inputText.length > 1) {
+        dispatch(handleLoadSearchRequest(inputText));
+      } else {
+        handleLoadRequest();
+      }
     }
+    handleDispatches();
   }, [dispatch, inputText]);
 
   return (
-    <input
-      type="text"
-      name="search"
-      onChange={({ target }) => debouncedFunction(target.value)}
-      defaultValue={defaultText}
-      data-test="search-input"
-    />
+    <Container>
+      <FaSearch color="hsl(0, 0%, 52%)" />
+      <input
+        placeholder="Search for a country..."
+        type="text"
+        name="search"
+        onChange={({ target }) => debouncedFunction(target.value)}
+        defaultValue={defaultText}
+        data-test="search-input"
+      />
+    </Container>
   );
 };
 
