@@ -7,11 +7,17 @@ export const Container = styled.main`
   align-items: center;
 `;
 
-export const Content = styled.div`
+export const Content = styled.section`
   width: 100%;
   display: flex;
   flex-direction: column;
   max-width: 1820px;
+
+  .inputs-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
 `;
 
 export const ListContainer = styled.ul`

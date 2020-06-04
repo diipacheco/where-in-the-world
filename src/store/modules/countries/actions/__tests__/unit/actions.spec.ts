@@ -99,7 +99,7 @@ describe('action creators unit tests', () => {
       const action = handleExpectedAction(
         {
           type: CountriesTypes.LOAD_FILTER_SUCCESS,
-          payload: { country: searchedCountry },
+          payload: { countries: searchedCountry },
         },
       );
 

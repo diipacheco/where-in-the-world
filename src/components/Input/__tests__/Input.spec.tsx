@@ -1,28 +1,36 @@
 import React from 'react';
-import * as ReactRedux from 'react-redux';
+import { Provider } from 'react-redux';
 import { mount } from 'enzyme';
+import configureMockStore from 'redux-mock-store';
+import payload from '../../../utils/tests/payloadMock';
+
 
 import Input from '../index';
 
-jest.mock('react-redux');
+const mockStore = configureMockStore([]);
 
 describe('<Input/> Element', () => {
-  it('should search a country with success', () => {
+  it('should be able to search a country', () => {
     expect.hasAssertions();
 
-    const wrapper = mount(<Input defaultText="" />);
+    const applicationState = {
+      countries: {
+        data: payload,
+        loading: true,
+        error: false,
+      },
+    };
+
+    const store = mockStore(applicationState);
+
+    const wrapper = mount(
+      <Provider store={store}>
+        <Input defaultText="" />
+      </Provider>,
+    );
     const inputElement = wrapper.find('[data-test="search-input"]');
 
-    inputElement.simulate('change', { target: { value: 'Brazil' } });
-
-    const dispatch = jest.fn();
-    const spyOnUseDispatch = jest
-      .spyOn(ReactRedux, 'useDispatch')
-      .mockImplementation(dispatch);
-
-    expect(spyOnUseDispatch).toHaveBeenCalledTimes(1);
+    expect(inputElement).toHaveLength(1);
     expect(wrapper).toMatchInlineSnapshot('ReactWrapper {}');
-
-    spyOnUseDispatch.mockRestore();
   });
 });

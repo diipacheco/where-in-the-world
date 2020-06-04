@@ -47,4 +47,5 @@ export function* handleLoadFilterRequestAction({ payload }: ReturnType<typeof ha
 export default all([
   takeLatest(CountriesTypes.LOAD_REQUEST, handleLoadRequestAction),
   takeLatest(CountriesTypes.LOAD_SEARCH_REQUEST, handleLoadSearchRequestAction),
+  takeLatest(CountriesTypes.LOAD_FILTER_REQUEST, handleLoadFilterRequestAction),
 ]);

@@ -6,6 +6,7 @@ import { ApplicationState } from '../../store/index';
 import { handleLoadRequest } from '../../store/modules/countries/actions';
 
 import Input from '../../components/Input';
+import Select from '../../components/Select';
 
 import {
   Container,
@@ -27,12 +28,15 @@ const Main: React.FC = () => {
   return (
     <Container>
       <Content>
-        <Input defaultText="" />
+        <nav className="inputs-container">
+          <Input defaultText="" />
+          <Select />
+        </nav>
         {loading ? (
           <h1 data-test="loading-element">loading...</h1>
         ) : (
           <ListContainer>
-            { error ? (
+            {error && errorMessage ? (
               <h1>{errorMessage}</h1>
             ) : (
               <>
@@ -71,8 +75,6 @@ const Main: React.FC = () => {
           </ListContainer>
         )}
       </Content>
-
-
     </Container>
   );
 };

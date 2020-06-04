@@ -29,7 +29,7 @@ const Input: React.FC<Props> = ({ defaultText }) => {
       if (inputText.length > 1) {
         dispatch(handleLoadSearchRequest(inputText));
       } else {
-        handleLoadRequest();
+        dispatch(handleLoadRequest());
       }
     }
     handleDispatches();
