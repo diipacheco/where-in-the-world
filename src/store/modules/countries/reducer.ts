@@ -44,6 +44,21 @@ const reducer: Reducer<CountriesState> = (state = INITIAL_STATE, action) => prod
       draft.errorMessage = action.payload.message;
       break;
     }
+    case CountriesTypes.LOAD_FILTER_REQUEST: {
+      draft.loading = true;
+      break;
+    }
+    case CountriesTypes.LOAD_FILTER_SUCCESS: {
+      draft.loading = false;
+      draft.data = action.payload.countries;
+      break;
+    }
+    case CountriesTypes.LOAD_FILTER_FAILURE: {
+      draft.loading = false;
+      draft.error = true;
+      draft.errorMessage = action.payload.message;
+      break;
+    }
     default:
   }
 });

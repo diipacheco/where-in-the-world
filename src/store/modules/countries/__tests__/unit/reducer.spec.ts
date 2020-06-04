@@ -25,142 +25,233 @@ describe('reducer unit tests', () => {
       .toStrictEqual({ data: [], loading: false, error: false });
   });
 
-  it('should handle LOAD_REQUEST action on initial state', () => {
-    expect.hasAssertions();
+  describe('request actions', () => {
+    it('should handle LOAD_REQUEST action on initial state', () => {
+      expect.hasAssertions();
 
-    const action = handleExpectedAction({ type: CountriesTypes.LOAD_REQUEST });
+      const action = handleExpectedAction({ type: CountriesTypes.LOAD_REQUEST });
 
-    const expectedState = { data: [], loading: false, error: false };
+      const expectedState = { data: [], loading: false, error: false };
 
-    const result = { data: [], loading: true, error: false };
+      const result = { data: [], loading: true, error: false };
 
-    Reducer(countries)
-      .withState(expectedState)
-      .expect(action)
-      .toReturnState(result);
+      Reducer(countries)
+        .withState(expectedState)
+        .expect(action)
+        .toReturnState(result);
+    });
+
+    it('should handle LOAD_SUCCESS action on initial state', () => {
+      expect.hasAssertions();
+
+      const action = handleExpectedAction(
+        {
+          type: CountriesTypes.LOAD_SUCCESS,
+          payload: { countries: payload },
+        },
+      );
+
+      const expectedState = { data: [], loading: true, error: false };
+
+      const result = { data: payload, loading: false, error: false };
+
+      Reducer(countries)
+        .withState(expectedState)
+        .expect(action)
+        .toReturnState(result);
+    });
+
+    it('should handle LOAD_FAILURE action on initial state', () => {
+      expect.hasAssertions();
+
+      const action = handleExpectedAction({ type: CountriesTypes.LOAD_FAILURE });
+
+      const expectedState = { data: [], loading: true, error: false };
+
+      const result = { data: [], loading: false, error: true };
+
+      Reducer(countries)
+        .withState(expectedState)
+        .expect(action)
+        .toReturnState(result);
+    });
   });
 
-  it('should handle LOAD_SUCCESS action on initial state', () => {
-    expect.hasAssertions();
+  describe('search actions', () => {
+    it('should handle LOAD_SEARCH_REQUEST action on initial state', () => {
+      expect.hasAssertions();
 
-    const action = handleExpectedAction(
-      {
-        type: CountriesTypes.LOAD_SUCCESS,
-        payload: { countries: payload },
-      },
-    );
+      const action = handleExpectedAction(
+        {
+          type: CountriesTypes.LOAD_SEARCH_REQUEST,
+          payload: { country: 'Brazil' },
+        },
+      );
 
-    const expectedState = { data: [], loading: true, error: false };
+      const expectedState = {
+        data: payload,
+        loading: false,
+        error: false,
+      };
 
-    const result = { data: payload, loading: false, error: false };
+      const result = {
+        data: payload,
+        loading: true,
+        error: false,
+      };
 
-    Reducer(countries)
-      .withState(expectedState)
-      .expect(action)
-      .toReturnState(result);
+      Reducer(countries)
+        .withState(expectedState)
+        .expect(action)
+        .toReturnState(result);
+    });
+
+    it('should handle LOAD_SEARCH_SUCCESS action on initial state', () => {
+      expect.hasAssertions();
+
+      const filtredCountry = payload.filter((country) => country.name === 'Brazil' || country.nativeName === 'Brasil');
+
+      const action = handleExpectedAction(
+        {
+          type: CountriesTypes.LOAD_SEARCH_SUCCESS,
+          payload: { country: filtredCountry },
+        },
+      );
+
+      const expectedState = {
+        data: payload,
+        loading: true,
+        error: false,
+      };
+
+      const result = {
+        data: filtredCountry,
+        loading: false,
+        error: false,
+      };
+
+      Reducer(countries)
+        .withState(expectedState)
+        .expect(action)
+        .toReturnState(result);
+    });
+
+    it('should handle LOAD_SEARCH_FAILURE action on inital state', () => {
+      expect.hasAssertions();
+
+      const action = handleExpectedAction(
+        {
+          type: CountriesTypes.LOAD_SEARCH_FAILURE,
+          payload: { message: 'Not Found' },
+        },
+      );
+
+      const expectedState = {
+        data: payload,
+        loading: true,
+        error: false,
+      };
+
+      const result = {
+        data: payload,
+        loading: false,
+        error: true,
+        errorMessage: 'Not Found',
+      };
+
+      Reducer(countries)
+        .withState(expectedState)
+        .expect(action)
+        .toReturnState(result);
+    });
   });
 
-  it('should handle LOAD_FAILURE action on initial state', () => {
-    expect.hasAssertions();
+  describe('filter actions', () => {
+    it('should handle LOAD_FILTER_REQUEST action on initial state', () => {
+      expect.hasAssertions();
 
-    const action = handleExpectedAction({ type: CountriesTypes.LOAD_FAILURE });
+      const action = handleExpectedAction(
+        {
+          type: CountriesTypes.LOAD_FILTER_REQUEST,
+          payload: { continent: 'Americas' },
+        },
+      );
 
-    const expectedState = { data: [], loading: true, error: false };
+      const expectedState = {
+        data: payload,
+        loading: false,
+        error: false,
+      };
 
-    const result = { data: [], loading: false, error: true };
+      const result = {
+        data: payload,
+        loading: true,
+        error: false,
+      };
 
-    Reducer(countries)
-      .withState(expectedState)
-      .expect(action)
-      .toReturnState(result);
-  });
+      Reducer(countries)
+        .withState(expectedState)
+        .expect(action)
+        .toReturnState(result);
+    });
+    it('should handle LOAD_FILTER_SUCCESS action on initial state', () => {
+      expect.hasAssertions();
 
-  it('should handle LOAD_SEARCH_REQUEST action on initial state', () => {
-    expect.hasAssertions();
+      const filtredCountry = payload.filter((country) => country.region === 'Americas');
 
-    const action = handleExpectedAction(
-      {
-        type: CountriesTypes.LOAD_SEARCH_REQUEST,
-        payload: { country: 'Brazil' },
-      },
-    );
+      const action = handleExpectedAction(
+        {
+          type: CountriesTypes.LOAD_FILTER_SUCCESS,
+          payload: { countries: filtredCountry },
+        },
+      );
 
-    const expectedState = {
-      data: payload,
-      loading:
-      false,
-      error: false,
-    };
+      const expectedState = {
+        data: payload,
+        loading: true,
+        error: false,
+      };
 
-    const result = {
-      data: payload,
-      loading: true,
-      error:
-      false,
-    };
+      const result = {
+        data: filtredCountry,
+        loading: false,
+        error: false,
+      };
 
-    Reducer(countries)
-      .withState(expectedState)
-      .expect(action)
-      .toReturnState(result);
-  });
+      Reducer(countries)
+        .withState(expectedState)
+        .expect(action)
+        .toReturnState(result);
+    });
+    it('should handle LOAD_FILTER_FAILURE action on inital state', () => {
+      expect.hasAssertions();
 
-  it('should handle LOAD_SEARCH_SUCCESS action on initial state', () => {
-    expect.hasAssertions();
+      expect.hasAssertions();
 
-    const filtredCountry = payload.filter((country) => country.name === 'Brazil' || country.nativeName === 'Brasil');
+      const action = handleExpectedAction(
+        {
+          type: CountriesTypes.LOAD_FILTER_FAILURE,
+          payload: { message: 'Something is going wrong, plase try latter' },
+        },
+      );
 
-    const action = handleExpectedAction(
-      {
-        type: CountriesTypes.LOAD_SEARCH_SUCCESS,
-        payload: { country: filtredCountry },
-      },
-    );
+      const expectedState = {
+        data: payload,
+        loading: true,
+        error: false,
+      };
 
-    const expectedState = {
-      data: payload,
-      loading: true,
-      error: false,
-    };
+      const result = {
+        data: payload,
+        loading: false,
+        error: true,
+        errorMessage: 'Something is going wrong, plase try latter',
+      };
 
-    const result = {
-      data: filtredCountry,
-      loading: false,
-      error: false,
-    };
-
-    Reducer(countries)
-      .withState(expectedState)
-      .expect(action)
-      .toReturnState(result);
-  });
-
-  it('should handle LOAD_SEARCH_FAILURE action on inital state', () => {
-    expect.hasAssertions();
-
-    const action = handleExpectedAction(
-      {
-        type: CountriesTypes.LOAD_SEARCH_FAILURE,
-        payload: { message: 'Not Found' },
-      },
-    );
-
-    const expectedState = {
-      data: payload,
-      loading: true,
-      error: false,
-    };
-
-    const result = {
-      data: payload,
-      loading: false,
-      error: true,
-      errorMessage: 'Not Found',
-    };
-
-    Reducer(countries)
-      .withState(expectedState)
-      .expect(action)
-      .toReturnState(result);
+      Reducer(countries)
+        .withState(expectedState)
+        .expect(action)
+        .toReturnState(result);
+    });
   });
 });

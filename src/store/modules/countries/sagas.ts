@@ -4,7 +4,14 @@ import {
 
 import api from '../../../services/api';
 import {
-  handleLoadSuccess, handleLoadFailure, handleLoadSearchSuccess, handleLoadSearchFailure, handleLoadSearchRequest,
+  handleLoadSuccess,
+  handleLoadFailure,
+  handleLoadSearchSuccess,
+  handleLoadSearchFailure,
+  handleLoadSearchRequest,
+  handleLoadFilterRequest,
+  handleLoadFilterSuccess,
+  handleLoadFilterFailure,
 } from './actions';
 import { CountriesTypes } from './types';
 
@@ -25,6 +32,15 @@ export function* handleLoadSearchRequestAction({ payload }: ReturnType<typeof ha
     yield put(handleLoadSearchSuccess(response.data));
   } catch (error) {
     yield put(handleLoadSearchFailure('flag not found, please typed another one'));
+  }
+}
+
+export function* handleLoadFilterRequestAction({ payload }: ReturnType<typeof handleLoadFilterRequest>) {
+  try {
+    const response = yield call(api.get, `/region/${payload.continent}`);
+    yield put(handleLoadFilterSuccess(response.data));
+  } catch (error) {
+    yield put(handleLoadFilterFailure('Something is going wrong, please try latter'));
   }
 }
 

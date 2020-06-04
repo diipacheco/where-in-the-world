@@ -22,3 +22,13 @@ export const handleLoadSearchRequest = (countryName: string) => action(Countries
 export const handleLoadSearchSuccess = (country: Country[]) => action(CountriesTypes.LOAD_SEARCH_SUCCESS, { country });
 
 export const handleLoadSearchFailure = (message: string) => action(CountriesTypes.LOAD_SEARCH_FAILURE, { message });
+
+/**
+ * Actions whos handle the request for countries based on continent
+ */
+
+export const handleLoadFilterRequest = (continent: string) => action(CountriesTypes.LOAD_FILTER_REQUEST, { continent });
+
+export const handleLoadFilterSuccess = (country: Country[]) => action(CountriesTypes.LOAD_FILTER_SUCCESS, { country });
+
+export const handleLoadFilterFailure = (message: string) => action(CountriesTypes.LOAD_FILTER_FAILURE, { message });
