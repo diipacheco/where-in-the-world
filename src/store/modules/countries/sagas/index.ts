@@ -2,7 +2,7 @@ import {
   call, put, all, takeLatest,
 } from 'redux-saga/effects';
 
-import api from '../../../services/api';
+import api from '../../../../services/api';
 import {
   handleLoadSuccess,
   handleLoadFailure,
@@ -12,8 +12,8 @@ import {
   handleLoadFilterRequest,
   handleLoadFilterSuccess,
   handleLoadFilterFailure,
-} from './actions';
-import { CountriesTypes } from './types';
+} from '../actions';
+import { CountriesTypes } from '../types';
 
 export function* handleLoadRequestAction() {
   try {

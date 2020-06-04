@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
-import * as actions from '../../actions';
-import { CountriesTypes } from '../../types';
+import * as actions from '../../index';
+import { CountriesTypes } from '../../../types';
 
-import handleExpectedAction from '../../../../../utils/tests/handleExpectedAction';
-import payload from '../../../../../utils/tests/payloadMock';
+import handleExpectedAction from '../../../../../../utils/tests/handleExpectedAction';
+import payload from '../../../../../../utils/tests/payloadMock';
 
 describe('action creators unit tests', () => {
   describe('listing countries action creators', () => {

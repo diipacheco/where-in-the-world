@@ -2,11 +2,11 @@
 import { runSaga } from 'redux-saga';
 import { AnyAction } from 'redux';
 
-import api from '../../../../../services/api';
-import payload from '../../../../../utils/tests/payloadMock';
-import * as actions from '../../actions';
-import * as sagas from '../../sagas';
-import { CountriesTypes } from '../../types';
+import api from '../../../../../../services/api';
+import payload from '../../../../../../utils/tests/payloadMock';
+import * as actions from '../../../actions';
+import * as sagas from '../../index';
+import { CountriesTypes } from '../../../types';
 
 describe('sagas integration tests', () => {
   describe('listing sagas', () => {
