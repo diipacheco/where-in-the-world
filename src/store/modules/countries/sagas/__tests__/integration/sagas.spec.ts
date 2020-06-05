@@ -166,4 +166,61 @@ describe('sagas integration tests', () => {
       filterCountries.mockClear();
     });
   });
+  describe('filtring by alpha code sagas', () => {
+    it('should call api and dispatch LOAD_ALPHA_FILTER_SUCCESS', async () => {
+      expect.hasAssertions();
+
+      const filtredCountry = payload.filter((country) => country.alpha3Code.toLocaleLowerCase() === 'bra');
+
+      const response = {
+        data: filtredCountry,
+      };
+
+      const filterCountries = jest.spyOn(api, 'get')
+        .mockResolvedValue(response);
+
+      const dispatched: Array<AnyAction> = [];
+
+      await runSaga({
+        dispatch: (action: AnyAction) => dispatched.push(action),
+      }, sagas.handleLoadAlphaFilterRequestAction, {
+        type: CountriesTypes.LOAD_ALPHA_FILTER_REQUEST,
+        payload: { code: 'br' },
+      });
+
+      expect(filterCountries).toHaveBeenCalledTimes(1);
+      expect(dispatched).toStrictEqual([actions.handleLoadFilterAlphaSuccess(response.data)]);
+
+      filterCountries.mockClear();
+    });
+    it('should call api and dispatch LOAD_ALPHA_FILTER_FAILURE', async () => {
+      expect.hasAssertions();
+
+      const response = {
+        data: {
+          status: '404',
+          message: 'Something is going wrong, please try latter',
+        },
+      };
+
+      const filterCountries = jest.spyOn(api, 'get')
+        .mockRejectedValue(response.data);
+
+      const dispatched: Array<AnyAction> = [];
+
+      await runSaga({
+        dispatch: (action: AnyAction) => dispatched.push(action),
+      }, sagas.handleLoadAlphaFilterRequestAction, {
+        type: CountriesTypes.LOAD_ALPHA_FILTER_REQUEST,
+        payload: {
+          code: 'asdasd',
+        },
+      });
+
+      expect(filterCountries).toHaveBeenCalledTimes(1);
+      expect(dispatched).toStrictEqual([actions.handleLoadFilterAlphaFailure(response.data.message)]);
+
+      filterCountries.mockClear();
+    });
+  });
 });

@@ -118,4 +118,44 @@ describe('action creators unit tests', () => {
       expect(actions.handleLoadFilterFailure('Something is going wrong, plase try latter')).toStrictEqual(action);
     });
   });
+  describe('filtring countries by alpha code', () => {
+    it('should create a action to handle countries request based on the alpha code', () => {
+      expect.hasAssertions();
+
+      const action = handleExpectedAction(
+        {
+          type: CountriesTypes.LOAD_ALPHA_FILTER_REQUEST,
+          payload: { code: 'bra' },
+        },
+      );
+
+      expect(actions.handleLoadFilterAlphaRequest('bra')).toStrictEqual(action);
+    });
+    it('should create a action to handle countries success request based on the alpha code', () => {
+      expect.hasAssertions();
+
+      const searchedCountry = payload.filter((country) => country.alpha3Code.toLocaleLowerCase() === 'bra');
+
+      const action = handleExpectedAction(
+        {
+          type: CountriesTypes.LOAD_ALPHA_FILTER_SUCCESS,
+          payload: { country: searchedCountry },
+        },
+      );
+
+      expect(actions.handleLoadFilterAlphaSuccess(searchedCountry)).toStrictEqual(action);
+    });
+    it('should create a action to handle countries failure request based on the alpha code', () => {
+      expect.hasAssertions();
+
+      const action = handleExpectedAction(
+        {
+          type: CountriesTypes.LOAD_ALPHA_FILTER_FAILURE,
+          payload: { message: 'Something is going wrong, plase try latter' },
+        },
+      );
+
+      expect(actions.handleLoadFilterAlphaFailure('Something is going wrong, plase try latter')).toStrictEqual(action);
+    });
+  });
 });

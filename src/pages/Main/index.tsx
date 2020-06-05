@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { ApplicationState } from '../../store/index';
 import { handleLoadRequest } from '../../store/modules/countries/actions';
@@ -41,33 +42,35 @@ const Main: React.FC = () => {
             ) : (
               <>
                 {countries?.map((country) => (
+
                   <ListItem key={country.name} data-test="countries-list">
                     <img src={country.flag} alt={`Flag from ${country.name}`} />
+                    <Link to={`/detail/${country.alpha3Code}`}>
+                      <section className="country-infos">
+                        <h1>{country.name}</h1>
 
-                    <section className="country-infos">
-                      <h1>{country.name}</h1>
-
-                      <div className="country-details">
-                        <p>
-                          <strong>
-                            Population:
-                          </strong>
-                          {country.population}
-                        </p>
-                        <p>
-                          <strong>
-                            Region:
-                          </strong>
-                          {country.region}
-                        </p>
-                        <p>
-                          <strong>
-                            Capital:
-                          </strong>
-                          {country.capital}
-                        </p>
-                      </div>
-                    </section>
+                        <div className="country-details">
+                          <p>
+                            <strong>
+                              Population:
+                            </strong>
+                            {country.population}
+                          </p>
+                          <p>
+                            <strong>
+                              Region:
+                            </strong>
+                            {country.region}
+                          </p>
+                          <p>
+                            <strong>
+                              Capital:
+                            </strong>
+                            {country.capital}
+                          </p>
+                        </div>
+                      </section>
+                    </Link>
                   </ListItem>
                 ))}
               </>
