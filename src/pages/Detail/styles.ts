@@ -60,7 +60,6 @@ export const Content = styled.div`
         display: flex;
         flex-wrap: wrap;
         width: 100%;
-        justify-content: space-around;
         align-items: center;
       }
 
@@ -68,14 +67,14 @@ export const Content = styled.div`
         border-radius: 3px;
         box-shadow: 0 4px 6px 0 hsl(0, 0%, 0%, 0.1);
         padding: 05px 25px;
+        margin-right: 10px;
         font-size: 14px;
         font-weight: 600; 
-        color: hsl(200, 15%, 8%, 0.6);
+        color: ${(props) => props.theme.colors.text};
         transition: 300ms ease;
 
         :hover {
         box-shadow: 0 4px 6px 0 hsl(0, 0%, 0%, 0.3);
-        color: hsl(200, 15%, 8%);
         }
       }
   }  
@@ -103,7 +102,7 @@ export const ParagraphsGroup = styled.div`
 `;
 
 export const LinkContainer = styled.div`
-  width: 64%;
+  width: 58%;
   display: flex;
 
   a {
@@ -113,14 +112,13 @@ export const LinkContainer = styled.div`
   box-shadow: 0 4px 6px 0 hsl(0, 0%, 0%, 0.1);
   padding: 10px 60px;
   margin-bottom: 50px;
-  color: hsl(200, 15%, 8%, 0.6);
+  color: ${(props) => props.theme.colors.text};
   font-size: 16px;
   font-weight: 600;
   transition: 300ms ease;
 
   :hover {
     box-shadow: 0 4px 6px 0 hsl(0, 0%, 0%, 0.3);
-    color: hsl(200, 15%, 8%);
   }
 
   svg {

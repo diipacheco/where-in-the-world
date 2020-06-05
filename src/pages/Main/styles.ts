@@ -5,6 +5,7 @@ export const Container = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 45px;
 `;
 
 export const Content = styled.section`
@@ -42,7 +43,7 @@ export const ListItem = styled.li`
    width: 100%;
    max-width: 220px;
    flex-direction: column;
-   background: hsl(0, 0%, 100%);
+   background: ${(props) => props.theme.colors.elements};
    box-shadow: 0 4px 6px 0 hsl(0, 0%, 0%, 0.1);
    justify-self: center;
 
@@ -54,7 +55,7 @@ export const ListItem = styled.li`
    }
 
    a {
-    color: hsl(200, 15%, 8%); 
+    color: ${(props) => props.theme.colors.text}; 
    }
 
 

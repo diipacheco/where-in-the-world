@@ -1,10 +1,11 @@
 /* eslint-disable no-mixed-operators */
 /* eslint-disable no-unused-vars */
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
 
+import { ThemeContext } from 'styled-components';
 import { ApplicationState } from '../../store/index';
 import { handleLoadFilterAlphaRequest } from '../../store/modules/countries/actions/filterCountriesByAlpha.actions';
 
@@ -18,6 +19,7 @@ import {
 const Detail: React.FC = () => {
   const { id } = useParams();
   const countries = useSelector((state: ApplicationState) => state.countries.data);
+  const { colors } = useContext(ThemeContext);
 
   const dispatch = useDispatch();
 
@@ -32,7 +34,7 @@ const Detail: React.FC = () => {
           to="/"
           data-test="back"
         >
-          <FaArrowLeft color="hsl(200, 15%, 8%)" />
+          <FaArrowLeft color={colors.text} />
           Back
         </Link>
       </LinkContainer>
