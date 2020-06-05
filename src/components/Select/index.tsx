@@ -28,7 +28,7 @@ const Select: React.FC = () => {
         dispatch(handleLoadFilterRequest(option.value))
       ));
     }
-  }, [selected]);
+  }, [selected, dispatch]);
 
   return (
     <Container>

@@ -6,7 +6,7 @@ import { Reducer } from 'redux-testkit';
 import handleExpectedAction from '../../../../../../utils/tests/handleExpectedAction';
 import payload from '../../../../../../utils/tests/payloadMock';
 
-import countries from '../../../reducer';
+import countries from '../..';
 import { CountriesState, CountriesTypes } from '../../../types';
 
 describe('reducer unit tests', () => {
@@ -231,6 +231,93 @@ describe('reducer unit tests', () => {
       const action = handleExpectedAction(
         {
           type: CountriesTypes.LOAD_FILTER_FAILURE,
+          payload: { message: 'Something is going wrong, plase try latter' },
+        },
+      );
+
+      const expectedState = {
+        data: payload,
+        loading: true,
+        error: false,
+      };
+
+      const result = {
+        data: payload,
+        loading: false,
+        error: true,
+        errorMessage: 'Something is going wrong, plase try latter',
+      };
+
+      Reducer(countries)
+        .withState(expectedState)
+        .expect(action)
+        .toReturnState(result);
+    });
+  });
+  describe('filter by alpha code actions', () => {
+    it('should handle LOAD_ALPHA_FILTER_REQUEST action on initial state', () => {
+      expect.hasAssertions();
+
+      const action = handleExpectedAction(
+        {
+          type: CountriesTypes.LOAD_ALPHA_FILTER_REQUEST,
+          payload: { code: 'bra' },
+        },
+      );
+
+      const expectedState = {
+        data: payload,
+        loading: false,
+        error: false,
+      };
+
+      const result = {
+        data: payload,
+        loading: true,
+        error: false,
+      };
+
+      Reducer(countries)
+        .withState(expectedState)
+        .expect(action)
+        .toReturnState(result);
+    });
+    it('should handle LOAD_ALPHA_FILTER_SUCCESS action on initial state', () => {
+      expect.hasAssertions();
+
+      const filtredCountry = payload.filter((country) => country.alpha3Code.toLocaleLowerCase() === 'bra');
+
+
+      const action = handleExpectedAction(
+        {
+          type: CountriesTypes.LOAD_ALPHA_FILTER_SUCCESS,
+          payload: { country: filtredCountry },
+        },
+      );
+
+      const expectedState = {
+        data: payload,
+        loading: true,
+        error: false,
+      };
+
+      const result = {
+        data: [filtredCountry],
+        loading: false,
+        error: false,
+      };
+
+      Reducer(countries)
+        .withState(expectedState)
+        .expect(action)
+        .toReturnState(result);
+    });
+    it('should handle LOAD_ALPHA_FILTER_FAILURE action on initial state', () => {
+      expect.hasAssertions();
+
+      const action = handleExpectedAction(
+        {
+          type: CountriesTypes.LOAD_ALPHA_FILTER_FAILURE,
           payload: { message: 'Something is going wrong, plase try latter' },
         },
       );

@@ -53,6 +53,10 @@ export const ListItem = styled.li`
      object-fit: cover;
    }
 
+   a {
+    color: hsl(200, 15%, 8%); 
+   }
+
 
    section {
      padding: 20px;

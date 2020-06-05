@@ -13,6 +13,7 @@ const payload: Country[] = [
     topLevelDomain: [
       '.br',
     ],
+    alpha3Code: 'BRA',
     currencies: [
       {
         code: 'BRL',
@@ -52,6 +53,7 @@ const payload: Country[] = [
     topLevelDomain: [
       '.ar',
     ],
+    alpha3Code: 'ARG',
     currencies: [
       {
         code: 'ARS',

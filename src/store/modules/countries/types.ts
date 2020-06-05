@@ -19,14 +19,23 @@ export enum CountriesTypes {
    /**
     * REQUEST FILTRED COUNTRIES BY CONTINENT
     */
+
    LOAD_FILTER_REQUEST = '@witw/LOAD_FILTER_REQUEST',
    LOAD_FILTER_SUCCESS = '@witw/LOAD_FILTER_SUCCESS',
    LOAD_FILTER_FAILURE = '@witw/LOAD_FILTER_FAILURE',
+
+   /**
+    * REQUEST FILTRED COUNTRIES BY ALPHA CODE
+    */
+
+   LOAD_ALPHA_FILTER_REQUEST = '@witw/LOAD_ALPHA_FILTER_REQUEST',
+   LOAD_ALPHA_FILTER_SUCCESS = '@witw/LOAD_ALPHA_FILTER_SUCCESS',
+   LOAD_ALPHA_FILTER_FAILURE = '@witw/LOAD_ALPHA_FILTER_FAILURE',
 }
 
 interface Currencie {
   code: string,
-  name: string
+  name: string,
   symbol: string
 }
 
@@ -44,12 +53,13 @@ export interface Country {
   name: string,
   population: number,
   region: string,
-  capital: string
-  flag: string
+  capital: string,
+  flag: string,
 
   /**
    * Detailed informations
    */
+  alpha3Code: string,
   nativeName: string,
   subregion: string,
   topLevelDomain: string[],
@@ -61,6 +71,6 @@ export interface Country {
 export interface CountriesState {
   data: Country[],
   loading: boolean,
-  error: boolean
+  error: boolean,
   errorMessage?: string
 }

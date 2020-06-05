@@ -3,7 +3,7 @@
 import produce from 'immer';
 import { Reducer } from 'redux';
 
-import { CountriesTypes, CountriesState } from './types';
+import { CountriesTypes, CountriesState } from '../types';
 
 const INITIAL_STATE: CountriesState = {
   data: [],
@@ -54,6 +54,21 @@ const reducer: Reducer<CountriesState> = (state = INITIAL_STATE, action) => prod
       break;
     }
     case CountriesTypes.LOAD_FILTER_FAILURE: {
+      draft.loading = false;
+      draft.error = true;
+      draft.errorMessage = action.payload.message;
+      break;
+    }
+    case CountriesTypes.LOAD_ALPHA_FILTER_REQUEST: {
+      draft.loading = true;
+      break;
+    }
+    case CountriesTypes.LOAD_ALPHA_FILTER_SUCCESS: {
+      draft.loading = false;
+      draft.data = [action.payload.country];
+      break;
+    }
+    case CountriesTypes.LOAD_ALPHA_FILTER_FAILURE: {
       draft.loading = false;
       draft.error = true;
       draft.errorMessage = action.payload.message;
