@@ -13,8 +13,8 @@ export default createGlobalStyle`
   }
 
   body {
-    background: hsl(0, 0%, 98%);
-    color: hsl(200, 15%, 8%);
+    background: ${(props) => props.theme.colors.background};
+    color: ${(props) => props.theme.colors.text};
     -webkit-font-smoothing: antialiased;
   }
 

@@ -1,8 +1,9 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { mount } from 'enzyme';
 import configureMockStore from 'redux-mock-store';
 import { MemoryRouter } from 'react-router-dom';
+
+import mountWithTheme from '../../../utils/tests/moutWithTheme';
 
 import Main from '../index';
 import payload from '../../../utils/tests/payloadMock';
@@ -23,7 +24,7 @@ describe('<Main/> component', () => {
 
     const store = mockStore(applicationState);
 
-    const wrapper = mount(
+    const wrapper = mountWithTheme(
       <Provider store={store}>
         <MemoryRouter>
           <Main />
@@ -49,7 +50,7 @@ describe('<Main/> component', () => {
 
     const store = mockStore(applicationState);
 
-    const wrapper = mount(
+    const wrapper = mountWithTheme(
       <Provider store={store}>
         <MemoryRouter>
           <Main />

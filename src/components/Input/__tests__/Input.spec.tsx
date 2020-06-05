@@ -1,9 +1,9 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { mount } from 'enzyme';
 import configureMockStore from 'redux-mock-store';
 import payload from '../../../utils/tests/payloadMock';
 
+import mountWithTheme from '../../../utils/tests/moutWithTheme';
 
 import Input from '../index';
 
@@ -23,7 +23,7 @@ describe('<Input/> Element', () => {
 
     const store = mockStore(applicationState);
 
-    const wrapper = mount(
+    const wrapper = mountWithTheme(
       <Provider store={store}>
         <Input defaultText="" />
       </Provider>,

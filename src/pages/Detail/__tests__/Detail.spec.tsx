@@ -3,7 +3,8 @@ import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
-import { mount } from 'enzyme';
+
+import mountWithTheme from '../../../utils/tests/moutWithTheme';
 
 import payload from '../../../utils/tests/payloadMock';
 import Detail from '../index';
@@ -32,7 +33,7 @@ describe('<Detail/> component', () => {
 
     const store = mockStore(applicationState);
 
-    const wrapper = mount(
+    const wrapper = mountWithTheme(
       <Provider store={store}>
         <MemoryRouter>
           <Detail />
@@ -63,7 +64,7 @@ describe('<Detail/> component', () => {
 
     const store = mockStore(applicationState);
 
-    const wrapper = mount(
+    const wrapper = mountWithTheme(
       <Provider store={store}>
         <MemoryRouter>
           <Detail />

@@ -20,9 +20,11 @@ export default styled.div`
     border-radius: 4px;
     border: none;
     box-shadow: 0 4px 6px 0 hsl(0, 0%, 0%, 0.1);
+    background: ${(props) => props.theme.colors.elements};
     padding-left: 48px;
+    color: ${(props) => props.theme.colors.text};
     ::placeholder {
-      color: hsl(0, 0%, 52%);
+    color: ${(props) => (props.theme.title === 'dark' ? 'hsl(0, 0%, 98%)' : 'hsl(0, 0%, 52%)')};
       font-weight: 600;
     } 
   }
