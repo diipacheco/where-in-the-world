@@ -2,15 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { handleLoadFilterRequest } from '../../store/modules/countries/actions/filterCountries.actions';
-import { Container, Content } from './styles';
-
-interface Options {
-  label: string
-  value: string
-}
+import Container from './styles';
 
 const Select: React.FC = () => {
-  const [selected, setSelected] = useState<Options[]>([]);
+  const [selected, setSelected] = useState('');
 
   const options = [
     { label: 'Africa', value: 'africa' },
@@ -23,23 +18,26 @@ const Select: React.FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (selected.length >= 1) {
-      selected.map((option) => (
-        dispatch(handleLoadFilterRequest(option.value))
-      ));
+    if (selected.length > 1) {
+      dispatch(handleLoadFilterRequest(selected));
     }
   }, [selected, dispatch]);
 
   return (
     <Container>
-      <Content
-        options={options}
-        hasSelectAll={false}
-        value={selected}
-        disableSearch
-        onChange={setSelected}
-        labelledBy="Teste"
-      />
+      <select
+        onChange={({ target }) => setSelected(target.value)}
+        name="filter"
+        id="filter"
+        data-test="continent-select"
+      >
+        <option disabled={selected.length > 1} defaultValue="placeholder">Filter by Region</option>
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
     </Container>
   );
 };
