@@ -18,7 +18,7 @@ export default createGlobalStyle`
     -webkit-font-smoothing: antialiased;
   }
 
-  body, input, button {
+  body, input, button, select {
     font: 14px 'Nunito Sans', sans-serif;
   }
 

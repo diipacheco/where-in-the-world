@@ -41,6 +41,41 @@ const payload: Country[] = [
       'VEN',
     ],
   },
+  {
+    name: 'Argentina',
+    population: 43590400,
+    region: 'Americas',
+    capital: 'Buenos Aires',
+    nativeName: 'Argentina',
+    subregion: 'South America',
+    flag: 'Argentina',
+    topLevelDomain: [
+      '.ar',
+    ],
+    currencies: [
+      {
+        code: 'ARS',
+        name: 'Argentine peso',
+        symbol: '$',
+      },
+    ],
+    languages: [
+      {
+        iso639_1: 'es',
+        iso639_2: 'spa',
+        name: 'Spanish',
+        nativeName: 'Español',
+      },
+    ],
+    borders: [
+      'BOL',
+      'BRA',
+      'CHL',
+      'PRY',
+      'URY',
+    ],
+
+  },
 ];
 
 export default payload;

@@ -1,51 +1,72 @@
 import styled from 'styled-components';
 
 export const Container = styled.main`
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
 `;
 
-export const List = styled.ul`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 120px;
+export const Content = styled.section`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  max-width: 1820px;
+
+  .inputs-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
 `;
+
+export const ListContainer = styled.ul`
+   margin-top: 60px;
+   display: grid;
+   grid-template-columns: repeat(4, 1fr);
+   grid-gap: 50px;
+
+   @media screen and (max-width: 988px) {
+   grid-template-columns: repeat(3, 1fr);
+   }
+   @media screen and (max-width: 724px) {
+   grid-template-columns: repeat(2, 1fr);
+   }
+   @media screen and (max-width: 511px) {
+   grid-template-columns: repeat(1, 1fr);
+   }
+ `;
 
 export const ListItem = styled.li`
-  display: flex;
-  width: 100%;
-  max-width: 320px;
-  flex-direction: column;
-  background: hsl(0, 0%, 100%);
-  box-shadow: 0 4px 6px 0 hsl(0, 0%, 0%, 0.1);
+   display: flex;
+   width: 100%;
+   max-width: 220px;
+   flex-direction: column;
+   background: hsl(0, 0%, 100%);
+   box-shadow: 0 4px 6px 0 hsl(0, 0%, 0%, 0.1);
+   justify-self: center;
 
-  img {
-    max-width: 100%; 
-    width: 320px;
-    height: 190px;
-    object-fit: cover;
-  }
+   img {
+     max-width: 100%;
+     width: 240px;
+     height: 160px;
+     object-fit: cover;
+   }
 
 
-  section {
-    padding: 20px;
-  }
+   section {
+     padding: 20px;
+   }
 
-  .country-details {
-    margin-top: 25px;
+   .country-details {
+     margin-top: 25px;
 
-    p {
-      strong {
-        margin-right: 5px;
-        font-weight: 600;
-      }
-    }
-  }
+     p {
+       strong {
+         margin-right: 5px;
+         font-weight: 600;
+       }
+     }
+   }
 
-`;
-
-interface ImageProp {
-  image: string
-}
+ `;

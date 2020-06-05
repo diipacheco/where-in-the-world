@@ -5,12 +5,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ApplicationState } from '../../store/index';
 import { handleLoadRequest } from '../../store/modules/countries/actions';
 
+import Input from '../../components/Input';
+import Select from '../../components/Select';
+
 import {
-  Container, List, ListItem,
+  Container,
+  Content,
+  ListContainer,
+  ListItem,
 } from './styles';
 
 const Main: React.FC = () => {
-  const { data: countries, loading } = useSelector((state: ApplicationState) => state.countries);
+  const {
+    data: countries, loading, error, errorMessage,
+  } = useSelector((state: ApplicationState) => state.countries);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -19,42 +27,54 @@ const Main: React.FC = () => {
 
   return (
     <Container>
-      {loading ? (
-        <h1 data-test="loading-element">loading...</h1>
-      ) : (
-        <List>
-          {countries?.map((country) => (
-            <ListItem key={country.name} data-test="countries-list">
-              <img src={country.flag} alt={`Flag from ${country.name}`} />
+      <Content>
+        <nav className="inputs-container">
+          <Input defaultText="" />
+          <Select />
+        </nav>
+        {loading ? (
+          <h1 data-test="loading-element">loading...</h1>
+        ) : (
+          <ListContainer>
+            {error && errorMessage ? (
+              <h1>{errorMessage}</h1>
+            ) : (
+              <>
+                {countries?.map((country) => (
+                  <ListItem key={country.name} data-test="countries-list">
+                    <img src={country.flag} alt={`Flag from ${country.name}`} />
 
-              <section className="country-infos">
-                <h1>{country.name}</h1>
+                    <section className="country-infos">
+                      <h1>{country.name}</h1>
 
-                <div className="country-details">
-                  <p>
-                    <strong>
-                      Population:
-                    </strong>
-                    {country.population}
-                  </p>
-                  <p>
-                    <strong>
-                      Region:
-                    </strong>
-                    {country.region}
-                  </p>
-                  <p>
-                    <strong>
-                      Capital:
-                    </strong>
-                    {country.capital}
-                  </p>
-                </div>
-              </section>
-            </ListItem>
-          ))}
-        </List>
-      )}
+                      <div className="country-details">
+                        <p>
+                          <strong>
+                            Population:
+                          </strong>
+                          {country.population}
+                        </p>
+                        <p>
+                          <strong>
+                            Region:
+                          </strong>
+                          {country.region}
+                        </p>
+                        <p>
+                          <strong>
+                            Capital:
+                          </strong>
+                          {country.capital}
+                        </p>
+                      </div>
+                    </section>
+                  </ListItem>
+                ))}
+              </>
+            )}
+          </ListContainer>
+        )}
+      </Content>
     </Container>
   );
 };

@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { action } from 'typesafe-actions';
 
-import { CountriesTypes, Country } from './types';
+import { CountriesTypes, Country } from '../types';
 
 export const handleLoadRequest = () => action(CountriesTypes.LOAD_REQUEST);
 
